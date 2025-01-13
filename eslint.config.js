@@ -12,4 +12,5 @@ export default [
   pluginJs.configs.recommended,
   ...eslintConfigEslint,
   eslintPluginPrettier,
+  { rules: { "no-console": "off" } },
 ];
