@@ -35,18 +35,20 @@ export default class MenuScene extends Scene {
     this.add.existing(
       new Portrait(
         this,
-        this.sys.canvas.width / 4,
+        (this.sys.canvas.width / 10) * 4,
         this.sys.canvas.height / 2,
         "MiniSwordMan",
+        "Chevaliers",
       ),
     );
 
     this.add.existing(
       new Portrait(
         this,
-        (this.sys.canvas.width / 4) * 3,
+        (this.sys.canvas.width / 10) * 6,
         this.sys.canvas.height / 2,
         "MiniSwordMan",
+        "Pirates",
       ),
     );
   }

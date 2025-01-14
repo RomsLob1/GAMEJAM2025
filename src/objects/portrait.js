@@ -9,8 +9,9 @@ export default class Portrait extends Phaser.GameObjects.Container {
    * @param {number} x x position of the Portrait
    * @param {number} y y position of the Portrait
    * @param {string} unitKey the key of the unit to display
+   * @param {string} name a name to display above the portrait
    */
-  constructor(scene, x, y, unitKey) {
+  constructor(scene, x, y, unitKey, name = "") {
     super(scene, x, y);
 
     this.frame = new Phaser.GameObjects.Sprite(scene, 0, 0, "portrait");
@@ -29,6 +30,21 @@ export default class Portrait extends Phaser.GameObjects.Container {
     this.unit.anims.play("still");
     const effectUnit = this.unit.preFX.addColorMatrix();
     effectUnit.grayscale();
+
+    if (name !== "") {
+      const text = new Phaser.GameObjects.Text(
+        scene,
+        0,
+        -this.frame.height / 2 - 10,
+        name,
+        {
+          fontSize: "24px",
+          stroke: "#000000",
+          strokeThickness: 2,
+        },
+      ).setOrigin(0.5);
+      this.add(text);
+    }
 
     // when the portrait is hovered, play the walk animation
     this.frame.on("pointerover", () => {
