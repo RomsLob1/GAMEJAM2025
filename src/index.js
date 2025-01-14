@@ -1,5 +1,7 @@
 import "./style.css";
 import Phaser from "phaser";
 import config from "./config.js";
-// eslint-disable-next-line no-new -- we are not doing anything with the game instance yet
-new Phaser.Game(config);
+import MenuScene from "./scenes/menu.js";
+
+const game = new Phaser.Game(config);
+game.scene.add("menu", new MenuScene(), true);
