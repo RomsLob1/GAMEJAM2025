@@ -20,4 +20,7 @@ export default {
     },
   },
   backgroundColor: "#87CEEB", // TODO: decide on a good color
+  render: {
+    pixelArt: true,
+  },
 };
