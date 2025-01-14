@@ -32,20 +32,22 @@ export default class MenuScene extends Scene {
       )
       .setOrigin(0.5, 0);
 
-    // eslint-disable-next-line no-new -- temporary solution
-    new Portrait(
-      this,
-      this.sys.canvas.width / 4,
-      this.sys.canvas.height / 2,
-      "MiniSwordMan",
+    this.add.existing(
+      new Portrait(
+        this,
+        this.sys.canvas.width / 4,
+        this.sys.canvas.height / 2,
+        "MiniSwordMan",
+      ),
     );
 
-    // eslint-disable-next-line no-new -- temporary solution
-    new Portrait(
-      this,
-      (this.sys.canvas.width / 4) * 3,
-      this.sys.canvas.height / 2,
-      "MiniSwordMan",
+    this.add.existing(
+      new Portrait(
+        this,
+        (this.sys.canvas.width / 4) * 3,
+        this.sys.canvas.height / 2,
+        "MiniSwordMan",
+      ),
     );
   }
 

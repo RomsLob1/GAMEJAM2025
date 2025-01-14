@@ -3,7 +3,7 @@ import Phaser from "phaser";
 /**
  *
  */
-export default class Portrait extends Phaser.GameObjects.Sprite {
+export default class Portrait extends Phaser.GameObjects.Container {
   /**
    * @param {Phaser.Scene} scene The scene the object will reside ignores
    * @param {number} x x position of the Portrait
@@ -11,26 +11,27 @@ export default class Portrait extends Phaser.GameObjects.Sprite {
    * @param {string} unitKey the key of the unit to display
    */
   constructor(scene, x, y, unitKey) {
-    super(scene, x, y, "portrait");
+    super(scene, x, y);
+
+    this.frame = new Phaser.GameObjects.Sprite(scene, 0, 0, "portrait");
+    this.add(this.frame);
+    this.frame.setOrigin(0.5);
+    this.frame.setInteractive();
+    const effectPortrait = this.frame.preFX.addColorMatrix();
+    effectPortrait.grayscale();
+
     this.unitKey = unitKey;
-    this.setOrigin(0.5);
-
-    this.scene.add.existing(this);
-
-    this.unit = this.scene.add.sprite(this.x, this.y - 10, unitKey);
+    this.unit = new Phaser.GameObjects.Sprite(scene, 0, -10, unitKey);
+    this.add(this.unit);
     this.unit.setOrigin(0.5);
     this.unit.setScale(3);
     this.#createAnimation();
     this.unit.anims.play("still");
-    this.setInteractive();
-
-    const effectPortrait = this.preFX.addColorMatrix();
-    effectPortrait.grayscale();
     const effectUnit = this.unit.preFX.addColorMatrix();
     effectUnit.grayscale();
 
     // when the portrait is hovered, play the walk animation
-    this.on("pointerover", () => {
+    this.frame.on("pointerover", () => {
       this.unit.anims.play("walk");
       this.setScale(1.1);
       this.unit.setScale(3.3);
@@ -39,7 +40,7 @@ export default class Portrait extends Phaser.GameObjects.Sprite {
     });
 
     // when the portrait is no longer hovered, play the still animation
-    this.on("pointerout", () => {
+    this.frame.on("pointerout", () => {
       this.unit.anims.play("still");
       this.setScale(1);
       this.unit.setScale(3);
