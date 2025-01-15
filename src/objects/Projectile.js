@@ -10,7 +10,7 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
    * @param {import("./Unit.js").default} target The target of the projectile
    * @param {string} projectileKey The key of the texture for the projectile to use
    * @param {number} attackDamage How much damage the projectile will do upon landing
-   * @param {number} yOffset The u offset of the projectile compared to starting position and target
+   * @param {number} yOffset The y offset of the projectile compared to starting position and target
    */
   constructor(
     scene,
