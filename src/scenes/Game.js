@@ -25,7 +25,6 @@ export default class Game extends Phaser.Scene {
       front: this.add.layer(),
     };
 
-    this.targetCameraX = 0;
     this.add.image(1500, 300, "background").setScale(1.2);
     this.imageWidth = 3000;
     this.imageHeight = 250;
@@ -54,12 +53,26 @@ export default class Game extends Phaser.Scene {
       0,
     );
 
-    if (this.keys.left.isDown || this.keys.leftSecond.isDown) {
-      this.targetCameraX -= 5;
+    if (
+      (this.keys.left.isDown || this.keys.leftSecond.isDown) &&
+      !(this.keys.right.isDown || this.keys.rightSecond.isDown)
+    ) {
+      this.targetCameraX -= 10;
+    } else if (
+      (this.keys.right.isDown || this.keys.rightSecond.isDown) &&
+      !(this.keys.left.isDown || this.keys.leftSecond.isDown)
+    ) {
+      this.targetCameraX += 10;
     }
-    if (this.keys.right.isDown || this.keys.rightSecond.isDown) {
-      this.targetCameraX += 5;
-    }
+
+    const cameraBounds = this.cameras.main.getBounds();
+
+    // eslint-disable-next-line new-cap -- This is phaser not respecting conventions
+    this.targetCameraX = Phaser.Math.Clamp(
+      this.targetCameraX,
+      cameraBounds.left,
+      cameraBounds.right,
+    );
   }
 
   preload() {
