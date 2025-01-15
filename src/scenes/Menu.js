@@ -1,4 +1,4 @@
-import { Scene, Geom } from "phaser";
+import { Scene } from "phaser";
 import Portrait from "../objects/Portrait.js";
 
 /**
