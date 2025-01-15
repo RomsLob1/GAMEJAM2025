@@ -1,4 +1,4 @@
-import { Scene } from "phaser";
+import { Scene, Geom } from "phaser";
 import Portrait from "../objects/Portrait.js";
 
 /**
@@ -32,7 +32,7 @@ export default class Menu extends Scene {
       )
       .setOrigin(0.5, 0);
 
-    this.add.existing(
+    const knightBtn = this.add.existing(
       new Portrait(
         this,
         (this.sys.canvas.width / 10) * 4,
@@ -42,7 +42,7 @@ export default class Menu extends Scene {
       ),
     );
 
-    this.add.existing(
+    const piratesBtn = this.add.existing(
       new Portrait(
         this,
         (this.sys.canvas.width / 10) * 6,
@@ -51,6 +51,14 @@ export default class Menu extends Scene {
         "Pirates",
       ),
     );
+
+    knightBtn.frame.on("pointerdown", () => {
+      this.scene.start("game", { faction: "knight" });
+    });
+
+    piratesBtn.frame.on("pointerdown", () => {
+      this.scene.start("game", { faction: "pirate" });
+    });
   }
 
   preload() {
