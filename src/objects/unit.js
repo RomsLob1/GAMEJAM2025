@@ -26,7 +26,6 @@ export default class Unit extends Phaser.GameObjects.Container {
     this.healthBar = scene.add.graphics();
     this.add(this.healthBar);
     this.healthBar.fillStyle(0x00ff00, 0.5);
-    console.log(this.width);
     this.healthBar.fillRect(0, 0, this.mainSprite.width, 10);
     this.healthBar.lineStyle(1, 0x000000);
     this.healthBar.strokeRect(0, 0, this.mainSprite.width, 10);
@@ -45,17 +44,22 @@ export default class Unit extends Phaser.GameObjects.Container {
     this.scene.physics.add.existing(this);
     this.xVelocity = (side === "player" ? 1 : -1) * this.AIOptions.speed;
     this.body.setVelocityX(this.xVelocity);
+    this.mainSprite.anims.play("walk");
   }
 
   preUpdate() {
+    if (!this.alive) return;
+
     const enemyUnitsInRange = this.scene.units.filter(
       (unit) =>
         unit.side !== this.side &&
         Math.abs(unit.x - this.x) < this.AIOptions.range,
     );
-    if (enemyUnitsInRange.length > 0) console.log(enemyUnitsInRange);
 
     if (enemyUnitsInRange.length > 0) {
+      if (this.mainSprite.anims.currentAnim.key !== "attack")
+        this.mainSprite.anims.play("idle", true);
+
       this.body.setVelocityX(0);
       const closestEnemy = enemyUnitsInRange.reduce((acc, unit) => {
         if (acc === null || this.distanceWith(acc) > this.distanceWith(unit)) {
@@ -65,14 +69,18 @@ export default class Unit extends Phaser.GameObjects.Container {
       }, null);
 
       if (
+        closestEnemy &&
         this.AIOptions.attackCooldown + this.AIOptions.lastAttack <
-        this.scene.game.getTime()
+          this.scene.game.getTime()
       ) {
+        this.mainSprite.anims.play("attack");
+        this.mainSprite.anims.playAfterRepeat("idle");
         this.AIOptions.lastAttack = this.scene.game.getTime();
         closestEnemy.damage(this.AIOptions.attack);
       }
     } else {
       this.body.setVelocityX(this.xVelocity);
+      this.mainSprite.anims.play("walk", true);
     }
   }
 
@@ -81,6 +89,7 @@ export default class Unit extends Phaser.GameObjects.Container {
   }
 
   damage(amount) {
+    const alivePreviously = this.alive || false;
     this.health -= amount;
     this.healthBar.clear();
 
@@ -104,6 +113,14 @@ export default class Unit extends Phaser.GameObjects.Container {
 
     this.healthBar.lineStyle(1, 0x000000);
     this.healthBar.strokeRect(0, 0, this.mainSprite.width, 10);
+
+    if (alivePreviously && !this.alive) {
+      this.mainSprite.anims.play("die");
+      this.mainSprite.on("animationcomplete", () => {
+        this.scene.children.remove(this);
+        this.destroy();
+      });
+    }
   }
 
   get alive() {
