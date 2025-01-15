@@ -1,12 +1,13 @@
 import Phaser from "phaser";
-import { createAnims, preload } from "../unitFactory";
-import unitFactory from "../unitFactory";
+import { createAnims, preload } from "../factory/unitFactory.js";
+import unitFactory from "../factory/unitFactory.js";
 
 /**
- * @property {import("../objects/unit").default[]} units All units on the map
+ * @property {import("../objects/Unit.js").default[]} units All units on the map
  */
-export default class GameScene extends Phaser.Scene {
-  create() {
+export default class Game extends Phaser.Scene {
+  create(data) {
+    this.faction = data.faction;
     this.units = [];
     this.#createAnims();
     this.targetCameraX = 0;
@@ -14,9 +15,9 @@ export default class GameScene extends Phaser.Scene {
     this.units.push(unitFactory("knights", 1, this, "player"));
     this.units.push(unitFactory("knights", 2, this, "player"));
     this.units.push(unitFactory("knights", 3, this, "player"));
-    this.units.push(unitFactory("knights", 1, this, "bot"));
-    this.units.push(unitFactory("knights", 2, this, "bot"));
-    this.units.push(unitFactory("knights", 3, this, "bot"));
+    this.units.push(unitFactory("pirates", 1, this, "bot"));
+    this.units.push(unitFactory("pirates", 2, this, "bot"));
+    this.units.push(unitFactory("pirates", 3, this, "bot"));
 
     this.layers = {
       bg: this.add.layer(),

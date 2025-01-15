@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fix": "npx eslint *.js **/*.js --fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",

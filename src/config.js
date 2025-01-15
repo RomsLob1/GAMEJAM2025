@@ -14,12 +14,11 @@ export default {
   physics: {
     default: "arcade",
     arcade: {
-      // TODO: disable debug when not in dev mode
-      debug: true,
+      debug: import.meta.env.MODE === "development",
       debugShowBody: true,
     },
   },
-  backgroundColor: "#87CEEB", // TODO: decide on a good color
+  backgroundColor: "#87CEEB",
   render: {
     pixelArt: true,
   },

@@ -5,9 +5,9 @@ import Phaser from "phaser";
  */
 export default class Projectile extends Phaser.Physics.Arcade.Sprite {
   /**
-   * @param {import("../scenes/game").default} scene The game scene this projectile belongs to
+   * @param {import("../scenes/Game.js").default} scene The game scene this projectile belongs to
    * @param { {x: number, y: number} } fromPosition The starting position of the projectile
-   * @param {import("./unit").default} target The target of the projectile
+   * @param {import("./Unit.js").default} target The target of the projectile
    * @param {string} projectileKey The key of the texture for the projectile to use
    * @param {number} attackDamage How much damage the projectile will do upon landing
    */
