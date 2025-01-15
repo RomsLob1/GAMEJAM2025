@@ -1,4 +1,4 @@
-import Unit from "./objects/unit";
+import Unit from "../objects/Unit.js";
 
 /**
  * This function creates units for the game
@@ -10,6 +10,7 @@ import Unit from "./objects/unit";
  * @throws {Error} If no unit could be created for the given faction and tier
  */
 export default function unitFactory(faction, tier, scene, side) {
+  // TODO: Ajuster les stats (actuellement les pirates sont plus faibles que les chevaliers)
   if (faction === "knights") {
     if (tier === 1) {
       return new Unit(scene, side, "MiniSwordMan", {
@@ -36,6 +37,35 @@ export default function unitFactory(faction, tier, scene, side) {
         range: 40,
       });
     }
+  } else if (faction === "pirates") {
+    if (tier === 1) {
+      return new Unit(scene, side, "MiniPirateCrew", {
+        maxHealth: 20,
+        attack: 3,
+      });
+    }
+    if (tier === 2) {
+      return new Unit(scene, side, "MiniPirateGunner", {
+        maxHealth: 10,
+        attack: 5,
+        speed: 65,
+        range: 100,
+        type: "ranged",
+        projectileKey: "MiniCannonBall",
+        attackCooldown: 1000,
+      });
+    }
+    if (tier === 3) {
+      return new Unit(scene, side, "MiniCannon", {
+        maxHealth: 50,
+        speed: 15,
+        attack: 15,
+        range: 100,
+        type: "ranged",
+        projectileKey: "MiniCannonBall",
+        attackCooldown: 4000,
+      });
+    }
   }
 
   throw new Error(`No unit created for faction ${faction} and tier ${tier}`);
@@ -60,6 +90,22 @@ export function preload(scene) {
     frameHeight: 32,
   });
   scene.load.spritesheet("Arrow", `./HumansProjectiles.png`, {
+    frameWidth: 16,
+    frameHeight: 16,
+  });
+  scene.load.spritesheet("MiniPirateCrew", `./units/MiniPirateCrew.png`, {
+    frameWidth: 32,
+    frameHeight: 32,
+  });
+  scene.load.spritesheet("MiniPirateGunner", `./units/MiniPirateGunner.png`, {
+    frameWidth: 32,
+    frameHeight: 32,
+  });
+  scene.load.spritesheet("MiniCannon", `./units/MiniCannon.png`, {
+    frameWidth: 32,
+    frameHeight: 32,
+  });
+  scene.load.spritesheet("MiniCannonBall", `./MiniCannonBall.png`, {
     frameWidth: 16,
     frameHeight: 16,
   });
@@ -180,6 +226,121 @@ export function createAnims(scene) {
     frames: scene.anims.generateFrameNumbers("MiniHorseMan", {
       start: 0,
       end: 8,
+    }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  scene.anims.create({
+    key: "walk-MiniPirateCrew",
+    frames: scene.anims.generateFrameNumbers("MiniPirateCrew", {
+      start: 6,
+      end: 11,
+    }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  scene.anims.create({
+    key: "attack-MiniPirateCrew",
+    frames: scene.anims.generateFrameNumbers("MiniPirateCrew", {
+      start: 18,
+      end: 23,
+    }),
+    frameRate: 8,
+  });
+
+  scene.anims.create({
+    key: "die-MiniPirateCrew",
+    frames: scene.anims.generateFrameNumbers("MiniPirateCrew", {
+      start: 30,
+      end: 33,
+    }),
+    frameRate: 8,
+  });
+
+  scene.anims.create({
+    key: "idle-MiniPirateCrew",
+    frames: scene.anims.generateFrameNumbers("MiniPirateCrew", {
+      start: 0,
+      end: 3,
+    }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  // TODO: Vérifier les frames pour les animations de MiniPirateGunner et MiniCannon, + voir pour l'animation de la boule de canon
+  scene.anims.create({
+    key: "walk-MiniPirateGunner",
+    frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
+      start: 8,
+      end: 14,
+    }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  scene.anims.create({
+    key: "attack-MiniPirateGunner",
+    frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
+      start: 16,
+      end: 23,
+    }),
+    frameRate: 8,
+  });
+
+  scene.anims.create({
+    key: "die-MiniPirateGunner",
+    frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
+      start: 39,
+      end: 42,
+    }),
+    frameRate: 8,
+  });
+
+  scene.anims.create({
+    key: "idle-MiniPirateGunner",
+    frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
+      start: 0,
+      end: 5,
+    }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  scene.anims.create({
+    key: "walk-MiniCannon",
+    frames: scene.anims.generateFrameNumbers("MiniCannon", {
+      start: 4,
+      end: 7,
+    }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  scene.anims.create({
+    key: "attack-MiniCannon",
+    frames: scene.anims.generateFrameNumbers("MiniCannon", {
+      start: 8,
+      end: 9,
+    }),
+    frameRate: 8,
+  });
+
+  scene.anims.create({
+    key: "die-MiniCannon",
+    frames: scene.anims.generateFrameNumbers("MiniCannon", {
+      start: 20,
+      end: 23,
+    }),
+    frameRate: 8,
+  });
+
+  scene.anims.create({
+    key: "idle-MiniCannon",
+    frames: scene.anims.generateFrameNumbers("MiniCannon", {
+      start: 0,
+      end: 0,
     }),
     frameRate: 8,
     repeat: -1,
