@@ -47,7 +47,7 @@ export default class Menu extends Scene {
         this,
         (this.sys.canvas.width / 10) * 6,
         this.sys.canvas.height / 2,
-        "MiniSwordMan",
+        "MiniPirateCrew",
         "Pirates",
       ),
     );
@@ -55,5 +55,6 @@ export default class Menu extends Scene {
 
   preload() {
     Portrait.preLoad(this, "MiniSwordMan");
+    Portrait.preLoad(this, "MiniPirateCrew");
   }
 }
