@@ -23,10 +23,16 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
     super(scene, fromPosition.x, fromPosition.y + yOffset, projectileKey);
     this.scene = scene;
     this.scene.physics.add.existing(this);
-    this.body.velocity.setTo(
-      target.x - fromPosition.x,
-      target.y - fromPosition.y,
-    );
+    const vel = {
+      x: target.x - fromPosition.x,
+      y: target.y - fromPosition.y,
+    };
+    // normalize velocity
+    const d = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
+    vel.x /= d;
+    vel.y /= d;
+
+    this.body.velocity.setTo(vel.x * 90, vel.y * 90);
     this.scene.add.existing(this);
     this.target = target;
     this.attackDamage = attackDamage;
