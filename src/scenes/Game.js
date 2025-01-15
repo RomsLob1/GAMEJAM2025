@@ -1,12 +1,13 @@
 import Phaser from "phaser";
-import { createAnims, preload } from "../unitFactory";
-import unitFactory from "../unitFactory";
+import { createAnims, preload } from "../factory/unitFactory.js";
+import unitFactory from "../factory/unitFactory.js";
 
 /**
- * @property {import("../objects/unit").default[]} units All units on the map
+ * @property {import("../objects/Unit.js").default[]} units All units on the map
  */
 export default class GameScene extends Phaser.Scene {
   create() {
+export default class Game extends Phaser.Scene {
     this.units = [];
     this.#createAnims();
     this.targetCameraX = 0;

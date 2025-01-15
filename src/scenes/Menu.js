@@ -1,10 +1,10 @@
 import { Scene } from "phaser";
-import Portrait from "../objects/portrait";
+import Portrait from "../objects/Portrait.js";
 
 /**
  *
  */
-export default class MenuScene extends Scene {
+export default class Menu extends Scene {
   create() {
     this.add
       .text(
