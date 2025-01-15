@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { createAnims, preload } from "../factory/unitFactory.js";
 import unitFactory from "../factory/unitFactory.js";
+import Base from "../objects/Base.js";
 
 /**
  * @property {import("../objects/Unit.js").default[]} units All units on the map
@@ -29,6 +30,11 @@ export default class Game extends Phaser.Scene {
     this.add.image(1500, 300, "background").setScale(1.2);
     this.imageWidth = 3000;
     this.imageHeight = 250;
+
+    this.bases = [
+      new Base(this, 400, 275, "base1").setScale(1.4),
+      new Base(this, 2700, 335, "base2").setScale(2),
+    ];
 
     this.#setBounds({
       x: 0,
@@ -65,6 +71,8 @@ export default class Game extends Phaser.Scene {
   preload() {
     preload(this);
     this.load.image("background", "/public/Background.png");
+    this.load.image("base1", "/public/boat.png");
+    this.load.image("base2", "/public/castle.png");
   }
 
   #createAnims() {
