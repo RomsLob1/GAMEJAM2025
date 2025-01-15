@@ -40,6 +40,9 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
   }
 
   preUpdate() {
+    // Visually rotate towards the direction of travel
+    this.setRotation(Math.atan2(this.body.velocity.y, this.body.velocity.x));
+
     const enemyUnits = this.scene.physics.collide(
       this,
       this.scene.units.filter((unit) => unit.side === this.target.side),
