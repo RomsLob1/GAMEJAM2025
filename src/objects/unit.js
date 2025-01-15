@@ -86,7 +86,6 @@ export default class Unit extends Phaser.GameObjects.Container {
       ) {
         if (this.AIOptions.type === "melee") {
           this.playAnimation("attack");
-          // this.mainSprite.anims
           this.playAnimationAfterRepeat("idle");
           this.AIOptions.lastAttack = this.scene.game.getTime();
           closestEnemy.damage(this.AIOptions.attack);
