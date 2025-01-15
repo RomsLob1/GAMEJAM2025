@@ -273,8 +273,8 @@ export function createAnims(scene) {
   scene.anims.create({
     key: "walk-MiniPirateGunner",
     frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
-      start: 8,
-      end: 14,
+      start: 7,
+      end: 12,
     }),
     frameRate: 8,
     repeat: -1,
@@ -283,8 +283,8 @@ export function createAnims(scene) {
   scene.anims.create({
     key: "attack-MiniPirateGunner",
     frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
-      start: 16,
-      end: 23,
+      start: 21,
+      end: 27,
     }),
     frameRate: 8,
   });
@@ -292,8 +292,8 @@ export function createAnims(scene) {
   scene.anims.create({
     key: "die-MiniPirateGunner",
     frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
-      start: 39,
-      end: 42,
+      start: 42,
+      end: 45,
     }),
     frameRate: 8,
   });
@@ -302,7 +302,7 @@ export function createAnims(scene) {
     key: "idle-MiniPirateGunner",
     frames: scene.anims.generateFrameNumbers("MiniPirateGunner", {
       start: 0,
-      end: 5,
+      end: 3,
     }),
     frameRate: 8,
     repeat: -1,
