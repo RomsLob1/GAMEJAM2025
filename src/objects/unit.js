@@ -21,12 +21,14 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     this.AIOptions = {
       range: 20,
       attackCooldown: 500,
-      speed: 1,
+      speed: 40,
       health: 10,
       attack: 10,
       ...AIOptions,
     };
+    this.scene.physics.add.existing(this);
     this.xVelocity = (side === "player" ? 1 : -1) * this.AIOptions.speed;
+    this.body.setVelocityX(this.xVelocity);
   }
 
   preUpdate() {
@@ -38,6 +40,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     if (enemyUnitsInRange.length > 0) console.log(enemyUnitsInRange);
 
     if (enemyUnitsInRange.length > 0) {
+      this.body.setVelocityX(0);
       const closestEnemy = enemyUnitsInRange.reduce((acc, unit) => {
         if (acc === null || this.distanceWith(acc) > this.distanceWith(unit)) {
           return unit;
@@ -48,7 +51,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
       closestEnemy.damage(this.AIOptions.attack);
     } else {
-      this.x += this.xVelocity;
+      this.body.setVelocityX(this.xVelocity);
     }
   }
 
