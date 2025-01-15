@@ -146,7 +146,8 @@ export default class Unit extends Phaser.GameObjects.Container {
     this.healthBar.fillRect(
       0,
       0,
-      (this.mainSprite.width / this.AIOptions.maxHealth) * this.health,
+      (this.mainSprite.width / this.AIOptions.maxHealth) *
+        Math.max(0, this.health),
       10,
     );
 
