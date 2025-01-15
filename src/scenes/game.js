@@ -10,6 +10,7 @@ export default class GameScene extends Scene {
     this.#createAnims();
 
     this.units.push(new Unit(this, "player", "MiniSwordMan", {}));
+    // this.units.push(new Unit(this, "bot", "MiniSwordMan", {}));
     this.units.push(
       new Unit(this, "bot", "MiniArcherMan", {
         type: "ranged",
@@ -100,7 +101,7 @@ export default class GameScene extends Scene {
         start: 33,
         end: 43,
       }),
-      frameRate: 8,
+      frameRate: 12,
     });
 
     this.anims.create({
