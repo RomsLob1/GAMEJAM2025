@@ -95,16 +95,17 @@ export default class Unit extends Phaser.GameObjects.Container {
             return;
           this.playAnimation("attack");
           this.mainSprite.on("animationcomplete", () => {
-          this.playAnimationAfterRepeat("idle");
-          // eslint-disable-next-line no-new -- I am using new for side effects
-          new Projectile(
-            this.scene,
-            { x: this.x, y: this.y },
-            closestEnemy,
-            this.AIOptions.projectileKey,
-            this.AIOptions.attack,
-          );
-          this.AIOptions.lastAttack = this.scene.game.getTime();
+            this.playAnimationAfterRepeat("idle");
+            // eslint-disable-next-line no-new -- I am using new for side effects
+            new Projectile(
+              this.scene,
+              { x: this.x, y: this.y },
+              closestEnemy,
+              this.AIOptions.projectileKey,
+              this.AIOptions.attack,
+              40,
+            );
+            this.AIOptions.lastAttack = this.scene.game.getTime();
           });
         }
       }
