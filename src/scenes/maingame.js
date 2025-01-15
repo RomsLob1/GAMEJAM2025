@@ -52,14 +52,14 @@ export default class MainGameScene extends Phaser.Scene {
   }
 
   #handleInput() {
-    this.keys = this.input.keyboard.addKeys({
+    const keys = this.input.keyboard.addKeys({
       left: Phaser.Input.Keyboard.KeyCodes.Q,
       right: Phaser.Input.Keyboard.KeyCodes.D,
     });
-    this.keys.left.on("down", () => this.#handleMove(this.keys));
-    this.keys.left.on("up", () => this.#handleMove(this.keys));
-    this.keys.right.on("down", () => this.#handleMove(this.keys));
-    this.keys.right.on("up", () => this.#handleMove(this.keys));
+    keys.left.on("down", () => this.#handleMove(keys));
+    keys.left.on("up", () => this.#handleMove(keys));
+    keys.right.on("down", () => this.#handleMove(keys));
+    keys.right.on("up", () => this.#handleMove(keys));
   }
 
   #handleMove(keys) {
