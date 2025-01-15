@@ -91,7 +91,10 @@ export default class Unit extends Phaser.GameObjects.Container {
           this.AIOptions.lastAttack = this.scene.game.getTime();
           closestEnemy.damage(this.AIOptions.attack);
         } else {
+          if (this.mainSprite.anims.currentAnim.key === `attack-${this.key}`)
+            return;
           this.playAnimation("attack");
+          this.mainSprite.on("animationcomplete", () => {
           this.playAnimationAfterRepeat("idle");
           // eslint-disable-next-line no-new -- I am using new for side effects
           new Projectile(
@@ -102,6 +105,7 @@ export default class Unit extends Phaser.GameObjects.Container {
             this.AIOptions.attack,
           );
           this.AIOptions.lastAttack = this.scene.game.getTime();
+          });
         }
       }
     } else {
