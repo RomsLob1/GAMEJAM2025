@@ -68,7 +68,7 @@ export default class Unit extends Phaser.GameObjects.Container {
     );
 
     if (enemyUnitsInRange.length > 0) {
-      if (this.mainSprite.anims.currentAnim.key !== "attack")
+      if (this.mainSprite.anims.currentAnim.key !== `attack-${this.key}`)
         this.playAnimation("idle", true);
 
       this.body.setVelocityX(0);
@@ -86,10 +86,13 @@ export default class Unit extends Phaser.GameObjects.Container {
       ) {
         if (this.AIOptions.type === "melee") {
           this.playAnimation("attack");
+          // this.mainSprite.anims
           this.playAnimationAfterRepeat("idle");
           this.AIOptions.lastAttack = this.scene.game.getTime();
           closestEnemy.damage(this.AIOptions.attack);
         } else {
+          this.playAnimation("attack");
+          this.playAnimationAfterRepeat("idle");
           // eslint-disable-next-line no-new -- I am using new for side effects
           new Projectile(
             this.scene,
@@ -111,8 +114,8 @@ export default class Unit extends Phaser.GameObjects.Container {
     this.mainSprite.anims.play(`${key}-${this.key}`, ignore);
   }
 
-  playAnimationAfterRepeat(key, ignore) {
-    this.mainSprite.anims.play(`${key}-${this.key}`, ignore);
+  playAnimationAfterRepeat(key) {
+    this.mainSprite.anims.playAfterRepeat(`${key}-${this.key}`);
   }
 
   distanceWith(unit) {
