@@ -17,7 +17,7 @@ export default class Portrait extends Phaser.GameObjects.Container {
     this.frame = new Phaser.GameObjects.Sprite(scene, 0, 0, "portrait");
     this.add(this.frame);
     this.frame.setOrigin(0.5);
-    this.frame.setInteractive();
+    this.frame.setInteractive({ useHandCursor: true });
     const effectPortrait = this.frame.preFX.addColorMatrix();
     effectPortrait.grayscale();
 

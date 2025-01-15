@@ -1,9 +1,9 @@
 import "./style.css";
 import Phaser from "phaser";
 import config from "./config.js";
-import MenuScene from "./scenes/menu.js";
-import GameScene from "./scenes/game.js";
+import Menu from "./scenes/Menu.js";
+import Game from "./scenes/Game.js";
 
 const game = new Phaser.Game(config);
-game.scene.add("menu", new MenuScene(), false);
-game.scene.add("game", new GameScene(), true);
+game.scene.add("menu", new Menu(), true);
+game.scene.add("game", new Game());
