@@ -3,7 +3,7 @@ import Phaser from "phaser";
 /**
  *
  */
-export default class Unit extends Phaser.GameObjects.Sprite {
+export default class Unit extends Phaser.GameObjects.Container {
   /**
    *
    * @param {import("../scenes/game").default} scene The scene this unit belongs in
@@ -13,18 +13,24 @@ export default class Unit extends Phaser.GameObjects.Sprite {
    */
   constructor(scene, side, key, AIOptions) {
     const x = side === "player" ? 0 : 300;
-    super(scene, x + 10, scene.sys.canvas.height / 2, key);
-    this.setScale(4);
+    super(scene, x + 10, scene.sys.canvas.height / 2);
+    this.mainSprite = new Phaser.GameObjects.Sprite(scene, 0, 0, key);
+    this.mainSprite.setOrigin(0.25, 0.3);
+    this.add(this.mainSprite);
+    this.mainSprite.setScale(3);
     this.scene = scene;
     scene.add.existing(this);
     this.side = side;
+    if (side === "bot") this.mainSprite.setFlipX(true);
+
     this.AIOptions = {
       range: 20,
       attackCooldown: 500,
       speed: 40,
       health: 10,
-      attack: 10,
+      attack: 2,
       ...AIOptions,
+      lastAttack: scene.game.getTime(),
     };
     this.scene.physics.add.existing(this);
     this.xVelocity = (side === "player" ? 1 : -1) * this.AIOptions.speed;
@@ -47,9 +53,14 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
         return acc;
       }, null);
-      console.log(closestEnemy.AIOptions.health);
 
-      closestEnemy.damage(this.AIOptions.attack);
+      if (
+        this.AIOptions.attackCooldown + this.AIOptions.lastAttack <
+        this.scene.game.getTime()
+      ) {
+        this.AIOptions.lastAttack = this.scene.game.getTime();
+        closestEnemy.damage(this.AIOptions.attack);
+      }
     } else {
       this.body.setVelocityX(this.xVelocity);
     }
