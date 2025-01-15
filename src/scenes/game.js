@@ -15,6 +15,7 @@ export default class GameScene extends Scene {
   update() {
     this.units.forEach((unit) => {
       if (!unit.alive) {
+        unit.destroy();
         this.children.remove(unit);
       }
     });
