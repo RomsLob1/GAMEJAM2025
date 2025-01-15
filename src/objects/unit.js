@@ -28,6 +28,8 @@ export default class Unit extends Phaser.GameObjects.Container {
     this.healthBar.fillStyle(0x00ff00, 0.5);
     console.log(this.width);
     this.healthBar.fillRect(0, 0, this.mainSprite.width, 10);
+    this.healthBar.lineStyle(1, 0x000000);
+    this.healthBar.strokeRect(0, 0, this.mainSprite.width, 10);
 
     this.AIOptions = {
       range: 20,
@@ -92,13 +94,16 @@ export default class Unit extends Phaser.GameObjects.Container {
       color = 0x00ff00;
     }
 
-    this.healthBar.fillStyle(color, 0.5);
+    this.healthBar.fillStyle(color);
     this.healthBar.fillRect(
       0,
       0,
       (this.mainSprite.width / this.AIOptions.maxHealth) * this.health,
       10,
     );
+
+    this.healthBar.lineStyle(1, 0x000000);
+    this.healthBar.strokeRect(0, 0, this.mainSprite.width, 10);
   }
 
   get alive() {
