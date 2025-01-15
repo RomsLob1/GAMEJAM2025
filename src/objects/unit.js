@@ -9,7 +9,7 @@ export default class Unit extends Phaser.GameObjects.Container {
    * @param {import("../scenes/game").default} scene The scene this unit belongs in
    * @param {"player" | "bot"} side player or bot side
    * @param {string} key key of the texture
-   * @param { {range?: number, attackCooldown?: number, speed?: number, health?: number, attack?: number} } AIOptions The options of the unit's AI
+   * @param { {range?: number, attackCooldown?: number, speed?: number, maxHealth?: number, attack?: number} } AIOptions The options of the unit's AI
    */
   constructor(scene, side, key, AIOptions) {
     const x = side === "player" ? 0 : 300;
@@ -23,15 +23,23 @@ export default class Unit extends Phaser.GameObjects.Container {
     this.side = side;
     if (side === "bot") this.mainSprite.setFlipX(true);
 
+    this.healthBar = scene.add.graphics();
+    this.add(this.healthBar);
+    this.healthBar.fillStyle(0x00ff00, 0.5);
+    console.log(this.width);
+    this.healthBar.fillRect(0, 0, this.mainSprite.width, 10);
+
     this.AIOptions = {
       range: 20,
       attackCooldown: 500,
       speed: 40,
-      health: 10,
+      maxHealth: 10,
       attack: 2,
       ...AIOptions,
       lastAttack: scene.game.getTime(),
     };
+
+    this.health = this.AIOptions.maxHealth;
     this.scene.physics.add.existing(this);
     this.xVelocity = (side === "player" ? 1 : -1) * this.AIOptions.speed;
     this.body.setVelocityX(this.xVelocity);
@@ -71,10 +79,29 @@ export default class Unit extends Phaser.GameObjects.Container {
   }
 
   damage(amount) {
-    this.AIOptions.health -= amount;
+    this.health -= amount;
+    this.healthBar.clear();
+
+    const healthPercentage = this.health / this.AIOptions.maxHealth;
+
+    let color = 0xff0000;
+    if (healthPercentage > 0.5) {
+      color = 0xffa500;
+    }
+    if (healthPercentage > 0.9) {
+      color = 0x00ff00;
+    }
+
+    this.healthBar.fillStyle(color, 0.5);
+    this.healthBar.fillRect(
+      0,
+      0,
+      (this.mainSprite.width / this.AIOptions.maxHealth) * this.health,
+      10,
+    );
   }
 
   get alive() {
-    return this.AIOptions.health > 0;
+    return this.health > 0;
   }
 }
