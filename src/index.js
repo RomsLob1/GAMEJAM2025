@@ -5,5 +5,5 @@ import MenuScene from "./scenes/menu.js";
 import MainGameScene from "./scenes/maingame.js";
 
 const game = new Phaser.Game(config);
-game.scene.add("menu", new MenuScene(), true);
-game.scene.add("maingame", new MainGameScene(), false);
+game.scene.add("menu", new MenuScene(), false);
+game.scene.add("mainGame", new MainGameScene(), true);
