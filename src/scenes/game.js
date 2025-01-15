@@ -63,7 +63,7 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     preload(this);
-    this.load.image("background", "/public/Decor.png");
+    this.load.image("background", "/public/Background.png");
   }
 
   #createAnims() {
