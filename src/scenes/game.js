@@ -48,14 +48,15 @@ export default class GameScene extends Phaser.Scene {
     const smoothFactor = 0.1;
     const currentX = this.cameras.main.scrollX;
     this.cameras.main.setScroll(
+      // eslint-disable-next-line new-cap -- This is phaser not respecting conventions
       Phaser.Math.Linear(currentX, this.targetCameraX, smoothFactor),
       0,
     );
 
-    if (this.keys.left.isDown) {
+    if (this.keys.left.isDown || this.keys.leftSecond.isDown) {
       this.targetCameraX -= 5;
     }
-    if (this.keys.right.isDown) {
+    if (this.keys.right.isDown || this.keys.rightSecond.isDown) {
       this.targetCameraX += 5;
     }
   }
@@ -72,6 +73,8 @@ export default class GameScene extends Phaser.Scene {
     this.keys = this.input.keyboard.addKeys({
       left: Phaser.Input.Keyboard.KeyCodes.Q,
       right: Phaser.Input.Keyboard.KeyCodes.D,
+      leftSecond: Phaser.Input.Keyboard.KeyCodes.LEFT,
+      rightSecond: Phaser.Input.Keyboard.KeyCodes.RIGHT,
     });
   }
 
