@@ -30,10 +30,30 @@ export default class SpawnUI extends Phaser.Scene {
       fontSize: 20,
     });
 
+    this._credits = 0;
+    this.energyDisplay = this.add.text(
+      200,
+      this.sys.canvas.height - 140,
+      `Credits ${this.credits}`,
+      {
+        fontSize: 20,
+      },
+    );
+
+    // every amount of time add energy
+    this.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: () => {
+        this.credits += 1;
+      },
+    });
+
     const units =
       this.faction === "knights"
         ? ["MiniSwordMan", "MiniArcherMan", "MiniHorseMan"]
         : ["MiniPirateCrew", "MiniPirateGunner", "MiniCannon"];
+    const costs = [2, 5, 10];
 
     units.forEach((unit, index) => {
       const y = this.sys.canvas.height - 110;
@@ -54,8 +74,20 @@ export default class SpawnUI extends Phaser.Scene {
         unitButton.fillColor = 0x888888;
       });
       unitButton.on("pointerdown", () => {
-        this.events.emit("spawnUnit", index + 1);
+        if (this.credits >= costs[index]) {
+          this.credits -= costs[index];
+          this.events.emit("spawnUnit", index + 1);
+        }
       });
     });
+  }
+
+  set credits(value) {
+    this._credits = value;
+    this.energyDisplay.setText(`Credits ${this.credits}`);
+  }
+
+  get credits() {
+    return this._credits;
   }
 }
