@@ -15,7 +15,7 @@ Dans le cadre du projet GameJam, nous avons créé un jeu de stratégie où s'af
 ### Étapes d'installation
 1. Clonez le dépôt :
    ```sh
-   https://iut-info.univ-reims.fr/gitlab/chas0025/gamejam
+   git clone https://iut-info.univ-reims.fr/gitlab/chas0025/gamejam
    ```
 2. Accédez au dossier du projet :
    ```sh
@@ -29,7 +29,10 @@ Dans le cadre du projet GameJam, nous avons créé un jeu de stratégie où s'af
    ```sh
    npx vite
    ```
-
+4. Dans la barre de recherche de votre navigateur :
+   ```sh
+   http://localhost:5173/
+   ```
 ## 🎮 Comment jouer
 - **Déplacement de la caméra** : Utilisez `Q` et `D` pour naviguer. (ou les flèches directionnelles)
 - **Gestion des unités** : Cliquez sur les icônes de recrutement pour envoyer des troupes.
@@ -45,4 +48,4 @@ Dans le cadre du projet GameJam, nous avons créé un jeu de stratégie où s'af
 Les assets utilisés dans ce projet sont issues de plusieurs sources disfférentes que l'on peut retrouver dans le fichier [assets.txt](./assets.txt)
 
 ## 📜 Licence
-Ce projet est sous licence MIT. Voir [LICENSE](./LICENSE) pour plus de détails.
+Ce projet est sous licence MIT. Voir [LICENSE](/LICENSE.txt) pour plus de détails.
