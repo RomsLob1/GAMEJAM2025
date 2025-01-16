@@ -70,7 +70,7 @@ export default class Game extends Phaser.Scene {
 
     this.#handleSpawnEvent();
 
-    const botFaction = this.faction === "knights" ? "knights" : "pirates";
+    const botFaction = this.faction === "knights" ? "pirates" : "knights";
     this.time.addEvent({
       delay: 10000,
       callback() {
