@@ -77,6 +77,12 @@ export default class SpawnUI extends Phaser.Scene {
         effects.grayscale(this.credits < cost ? 1 : 0);
       });
 
+      const costDisplay = this.add.text(x + 50, y + 15, `Coût ${cost}`, {
+        fontSize: 20,
+      });
+      costDisplay.setOrigin(0.5);
+      this.layers.front.add(costDisplay);
+
       unitButton.on("pointerover", () => {
         unitButton.fillColor = 0xaaaaaa;
       });
