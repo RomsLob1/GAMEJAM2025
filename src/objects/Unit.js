@@ -7,7 +7,7 @@ import Projectile from "./Projectile.js";
 export default class Unit extends Phaser.GameObjects.Container {
   /**
    *
-   * @param {import("../scenes/game").default} scene The scene this unit belongs in
+   * @param {import("../scenes/Game").default} scene The scene this unit belongs in
    * @param {"player" | "bot"} side player or bot side
    * @param {string} key key of the texture
    * @param { {range?: number, attackCooldown?: number, speed?: number, maxHealth?: number, attack?: number, type?: "ranged" | "melee", projectileKey: string} } AIOptions The options of the unit's AI
@@ -61,7 +61,7 @@ export default class Unit extends Phaser.GameObjects.Container {
   preUpdate() {
     if (!this.alive) return;
 
-    const enemyUnitsInRange = this.scene.units.filter(
+    const enemyUnitsInRange = this.scene.damageables.filter(
       (unit) =>
         unit.side !== this.side &&
         Math.abs(unit.x - this.x) < this.AIOptions.range,
@@ -86,7 +86,6 @@ export default class Unit extends Phaser.GameObjects.Container {
       ) {
         if (this.AIOptions.type === "melee") {
           this.playAnimation("attack");
-          // this.mainSprite.anims
           this.playAnimationAfterRepeat("idle");
           this.AIOptions.lastAttack = this.scene.game.getTime();
           closestEnemy.damage(this.AIOptions.attack);

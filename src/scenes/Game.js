@@ -64,6 +64,10 @@ export default class Game extends Phaser.Scene {
     });
   }
 
+  get damageables() {
+    return [...this.units, ...this.bases];
+  }
+
   update() {
     this.units = this.units.filter((unit) => unit.alive);
 
@@ -107,6 +111,7 @@ export default class Game extends Phaser.Scene {
   #createAnims() {
     createAnims(this);
   }
+
   #handleInput() {
     this.keys = this.input.keyboard.addKeys({
       left: Phaser.Input.Keyboard.KeyCodes.Q,
