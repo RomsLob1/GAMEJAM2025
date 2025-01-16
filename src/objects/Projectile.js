@@ -58,6 +58,9 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
         });
 
       closestEnemy.damage(this.attackDamage);
+      this.scene.sound.play(`bowhit${Math.floor(Math.random() * 2) + 1}`, {
+        volume: 0.5,
+      });
       this.destroy();
     }
   }
