@@ -64,9 +64,13 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
       this.destroy();
     }
 
-    if (!this.scene) return;
     // If the projectile is out of bounds, destroy it
-    if (this.x < 0 || this.x > this.scene.game.config.width) this.destroy();
-    if (this.y < 0 || this.y > this.scene.game.config.height) this.destroy();
+    if (
+      this.x < 0 ||
+      this.x > 3000 ||
+      this.y < 0 ||
+      this.y > this.scene.game.config.height
+    )
+      this.destroy();
   }
 }
