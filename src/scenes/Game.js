@@ -13,6 +13,15 @@ export default class Game extends Phaser.Scene {
     this.#createAnims();
     this.targetCameraX = 0;
 
+    this.backgroundMusic = this.sound.add(
+      `music${Math.floor(Math.random() * 3) + 1}`,
+      {
+        volume: 0.5,
+        loop: true,
+      },
+    );
+    this.backgroundMusic.play();
+
     this.scene.launch("spawnUI", { faction: this.faction });
 
     this.units.push(
@@ -98,12 +107,12 @@ export default class Game extends Phaser.Scene {
       if (!this.bases[0].alive) {
         text =
           this.faction === "knights"
-            ? "Tu as réussi a repousser les pirates !"
-            : "Les chevaliers vous ont repousser...";
+            ? "Tu as réussi à repousser les pirates !"
+            : "Les chevaliers vous ont repoussé...";
       } else if (!this.bases[1].alive) {
         text =
           this.faction === "pirates"
-            ? "Tu as réussi à envahir le chateau !"
+            ? "Tu as réussi à envahir le château !"
             : "Les pirates vous ont envahi...";
       }
       const endText = this.add
@@ -160,6 +169,16 @@ export default class Game extends Phaser.Scene {
     this.load.image("background", "/background.png");
     this.load.image("boat", "/boat.png");
     this.load.image("castle", "/castle.png");
+    this.load.audio("music1", "/sounds/music1.mp3");
+    this.load.audio("music2", "/sounds/music2.mp3");
+    this.load.audio("music3", "/sounds/music3.mp3");
+    this.load.audio("sword1", "/sounds/swordhit1.wav");
+    this.load.audio("sword2", "/sounds/swordhit2.wav");
+    this.load.audio("sword3", "/sounds/swordhit3.wav");
+    this.load.audio("bowattack1", "/sounds/bowattack1.wav");
+    this.load.audio("bowattack2", "/sounds/bowattack2.wav");
+    this.load.audio("bowhit1", "/sounds/bowhit1.wav");
+    this.load.audio("bowhit2", "/sounds/bowhit2.wav");
   }
 
   #createAnims() {
