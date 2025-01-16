@@ -69,6 +69,32 @@ export default class Game extends Phaser.Scene {
     });
 
     this.#handleSpawnEvent();
+
+    const botFaction = this.faction === "knights" ? "knights" : "pirates";
+    this.time.addEvent({
+      delay: 10000,
+      callback() {
+        this.units.push(unitFactory(botFaction, 1, this, "bot"));
+      },
+      callbackScope: this,
+      loop: true,
+    });
+    this.time.addEvent({
+      delay: 20000,
+      callback() {
+        this.units.push(unitFactory(botFaction, 2, this, "bot"));
+      },
+      callbackScope: this,
+      loop: true,
+    });
+    this.time.addEvent({
+      delay: 50000,
+      callback() {
+        this.units.push(unitFactory(botFaction, 3, this, "bot"));
+      },
+      callbackScope: this,
+      loop: true,
+    });
   }
 
   get damageables() {
@@ -137,32 +163,6 @@ export default class Game extends Phaser.Scene {
       cameraBounds.left,
       cameraBounds.right,
     );
-
-    const botFaction = this.faction === "knights" ? "knights" : "pirates";
-    this.time.addEvent({
-      delay: 10000,
-      callback() {
-        this.units.push(unitFactory(botFaction, 1, this, "bot"));
-      },
-      callbackScope: this,
-      loop: true,
-    });
-    this.time.addEvent({
-      delay: 20000,
-      callback() {
-        this.units.push(unitFactory(botFaction, 2, this, "bot"));
-      },
-      callbackScope: this,
-      loop: true,
-    });
-    this.time.addEvent({
-      delay: 50000,
-      callback() {
-        this.units.push(unitFactory(botFaction, 3, this, "bot"));
-      },
-      callbackScope: this,
-      loop: true,
-    });
   }
 
   preload() {
