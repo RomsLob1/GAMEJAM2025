@@ -31,6 +31,7 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
     const d = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
     vel.x /= d;
     vel.y /= d;
+    this.projectileKey = projectileKey;
 
     this.body.velocity.setTo(vel.x * 90, vel.y * 90);
     this.scene.add.existing(this);
@@ -58,9 +59,10 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
         });
 
       closestEnemy.damage(this.attackDamage);
-      this.scene.sound.play(`bowhit${Math.floor(Math.random() * 2) + 1}`, {
-        volume: 0.5,
-      });
+      if (this.projectileKey === "arrow")
+        this.scene.sound.play(`bowhit${Math.floor(Math.random() * 2) + 1}`, {
+          volume: 0.5,
+        });
       this.destroy();
     }
 
