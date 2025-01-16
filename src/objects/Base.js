@@ -13,7 +13,7 @@ export default class Base extends Phaser.GameObjects.Image {
     this.scene.add.existing(this);
 
     this.scene.physics.add.existing(this, true);
-    this.faction = texture === "castle" ? "knight" : "pirate";
+    this.faction = texture === "castle" ? "knights" : "pirates";
     this.health = 100;
     this.maxHealth = 100;
 

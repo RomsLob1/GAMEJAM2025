@@ -53,11 +53,11 @@ export default class Menu extends Scene {
     );
 
     knightBtn.frame.on("pointerdown", () => {
-      this.scene.start("game", { faction: "knight" });
+      this.scene.start("game", { faction: "knights" });
     });
 
     piratesBtn.frame.on("pointerdown", () => {
-      this.scene.start("game", { faction: "pirate" });
+      this.scene.start("game", { faction: "pirates" });
     });
   }
 
