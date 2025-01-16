@@ -25,7 +25,7 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.add.existing(this);
     const vel = {
       x: target.x - fromPosition.x,
-      y: target.y - fromPosition.y,
+      y: fromPosition.y - fromPosition.y,
     };
     // normalize velocity
     const d = Math.sqrt(vel.x * vel.x + vel.y * vel.y);
@@ -45,7 +45,7 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
 
     const enemyUnits = this.scene.physics.collide(
       this,
-      this.scene.units.filter((unit) => unit.side === this.target.side),
+      this.scene.damageables.filter((unit) => unit.side === this.target.side),
     );
 
     if (enemyUnits) {
@@ -63,5 +63,14 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
       });
       this.destroy();
     }
+
+    // If the projectile is out of bounds, destroy it
+    if (
+      this.x < 0 ||
+      this.x > 3000 ||
+      this.y < 0 ||
+      this.y > this.scene.game.config.height
+    )
+      this.destroy();
   }
 }
