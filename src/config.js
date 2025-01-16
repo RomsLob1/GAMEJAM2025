@@ -6,7 +6,7 @@ import Phaser from "phaser";
 export default {
   type: Phaser.AUTO,
   width: 800, // TODO: decide on a good size
-  height: 700,
+  height: 750,
   scale: {
     mode: Phaser.Scale.NONE,
     autoCenter: Phaser.Scale.Center,
