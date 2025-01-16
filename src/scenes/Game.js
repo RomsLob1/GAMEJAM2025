@@ -26,14 +26,30 @@ export default class Game extends Phaser.Scene {
       front: this.add.layer(),
     };
 
-    this.add.image(1500, 300, "background").setScale(1.2);
+    const background = this.add.image(1500, 300, "background").setScale(1.2);
     this.imageWidth = 3000;
     this.imageHeight = 250;
 
     this.bases = [
-      new Base(this, 400, 275, "base1").setScale(1.4),
-      new Base(this, 2700, 335, "base2").setScale(2),
+      new Base(
+        this,
+        this.faction === "pirate" ? 400 : 2700,
+        275,
+        "boat",
+      ).setScale(1.4),
+      new Base(
+        this,
+        this.faction === "knight" ? 400 : 2700,
+        335,
+        "castle",
+      ).setScale(2),
     ];
+
+    if (this.faction === "knight") {
+      background.flipX = true;
+      this.bases[0].setFlipX(true);
+      this.bases[1].setFlipX(true);
+    }
 
     this.#setBounds({
       x: 0,
@@ -83,9 +99,9 @@ export default class Game extends Phaser.Scene {
 
   preload() {
     preload(this);
-    this.load.image("background", "/public/Background.png");
-    this.load.image("base1", "/public/boat.png");
-    this.load.image("base2", "/public/castle.png");
+    this.load.image("background", "/background.png");
+    this.load.image("boat", "/boat.png");
+    this.load.image("castle", "/castle.png");
   }
 
   #createAnims() {
