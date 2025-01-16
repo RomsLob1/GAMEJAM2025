@@ -25,11 +25,19 @@ Dans le cadre du projet GameJam 2025, nous avons créé un jeu de stratégie où
    ```sh
    npm install
    ```
-4. Lancez le jeu en mode développement :
+4. Construire le projet : 
    ```sh
-   npx vite
+   npm run build
    ```
-4. Dans la barre de recherche de votre navigateur :
+5. Déplacez vous dans le dossier dist :
+   ```sh
+   cd dist
+   ```  
+6. Lancer le projet en mode production :
+   ```sh
+   npx serve
+   ```
+7. Dans la barre de recherche de votre navigateur :
    ```sh
    http://localhost:5173/
    ```
