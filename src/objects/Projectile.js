@@ -49,7 +49,7 @@ export default class Projectile extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (enemyUnits) {
-      const closestEnemy = this.scene.units
+      const closestEnemy = this.scene.damageables
         .filter((enemy) => enemy.side === this.target.side)
         .reduce((acc, cur) => {
           if (acc === null || cur.distanceWith(this) < acc.distanceWith(this))
