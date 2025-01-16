@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { createAnims, preload } from "../factory/unitFactory.js";
 import unitFactory from "../factory/unitFactory.js";
+import Base from "../objects/Base.js";
 
 /**
  * @property {import("../objects/Unit.js").default[]} units All units on the map
@@ -23,11 +24,33 @@ export default class Game extends Phaser.Scene {
       bg: this.add.layer(),
       back: this.add.layer(),
       front: this.add.layer(),
+      endMessage: this.add.layer(),
     };
 
-    this.add.image(1500, 300, "background").setScale(1.2);
+    const background = this.add.image(1500, 300, "background").setScale(1.2);
     this.imageWidth = 3000;
     this.imageHeight = 250;
+
+    this.bases = [
+      new Base(
+        this,
+        this.faction === "pirate" ? 400 : 2700,
+        275,
+        "boat",
+      ).setScale(1.4),
+      new Base(
+        this,
+        this.faction === "knight" ? 400 : 2700,
+        335,
+        "castle",
+      ).setScale(2),
+    ];
+
+    if (this.faction === "knight") {
+      background.flipX = true;
+      this.bases[0].setFlipX(true);
+      this.bases[1].setFlipX(true);
+    }
 
     this.#setBounds({
       x: 0,
@@ -42,7 +65,42 @@ export default class Game extends Phaser.Scene {
     });
   }
 
+  get damageables() {
+    return [...this.units, ...this.bases];
+  }
+
   update() {
+    if (this.bases.some((base) => !base.alive)) {
+      let text = "";
+      this.game.pause();
+      if (!this.bases[0].alive) {
+        text =
+          this.faction === "knight"
+            ? "Tu as réussi a repousser les pirates !"
+            : "Les chevaliers vous ont repousser...";
+      } else if (!this.bases[1].alive) {
+        text =
+          this.faction === "pirate"
+            ? "Tu as réussi à envahir le chateau !"
+            : "Les pirates vous ont envahi...";
+      }
+      const endText = this.add
+        .text(
+          this.sys.canvas.width / 2 + this.cameras.main.scrollX,
+          this.sys.canvas.height / 2,
+          text,
+          {
+            fontSize: 25,
+            color: "white",
+            align: "center",
+            stroke: "#000000",
+            strokeThickness: 4,
+          },
+        )
+        .setOrigin(0.5);
+      endText.layer = this.layers.endMessage;
+    }
+
     this.units = this.units.filter((unit) => unit.alive);
 
     const smoothFactor = 0.1;
@@ -77,12 +135,15 @@ export default class Game extends Phaser.Scene {
 
   preload() {
     preload(this);
-    this.load.image("background", "/public/Background.png");
+    this.load.image("background", "/background.png");
+    this.load.image("boat", "/boat.png");
+    this.load.image("castle", "/castle.png");
   }
 
   #createAnims() {
     createAnims(this);
   }
+
   #handleInput() {
     this.keys = this.input.keyboard.addKeys({
       left: Phaser.Input.Keyboard.KeyCodes.Q,
