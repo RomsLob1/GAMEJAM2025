@@ -1,0 +1,19 @@
+- Musique du jeu :
+    - Par Alkakrab
+    - https://alkakrab.itch.io/
+ - Bruitages du jeu :
+    - Par tommusic (coups, flèches et autres)
+    - https://tommusic.itch.io/
+    - Canon et fusil : https://www.sound-fishing.net/sons/canon
+ - Sprites :
+    - Par lyaseek
+    - https://lyaseek.itch.io/
+    - Pirates : https://lyaseek.itch.io/minifpirates
+    - Chevaliers : https://lyaseek.itch.io/minifhumans
+ - Background:
+    - Combinée de plusieurs images :
+        - Plaine : https://kiddolink.itch.io/parallax-background-plains-pixel-art
+        - Plage https://fr.vecteezy.com/art-vectoriel/7875091-plage-pixel-tropicale-avec-surf-paysage-marin-avec-ciel-bleu-et-lueur-du-soleil-couchant-rouleaux-de-mousse-blancs-sur-sable-chaud-jaune-creation-de-vagues-oceaniques-colorees-vacances-vecteur-humeur (pas celien-ci mais incapable de retrouver l'ancien, image libre de droit)
+ - Bases :
+    - Chateau : https://fr.vecteezy.com/art-vectoriel/1270336-jeu-video-pixel-art-chateau-scene
+    - Bateau : https://fr.freepik.com/vecteurs-premium/navire-pixel-art-vectoriel-entierement-modifiable-pour-developpement-jeux-conception-graphique-actifs-jeu-actif-web_76738869.htm
