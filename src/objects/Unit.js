@@ -97,7 +97,7 @@ export default class Unit extends Phaser.GameObjects.Container {
           if (this.mainSprite.anims.currentAnim.key === `attack-${this.key}`)
             return;
           this.playAnimation("attack");
-          this.mainSprite.on("animationcomplete", () => {
+          this.mainSprite.once("animationcomplete", () => {
             this.playAnimationAfterRepeat("idle");
             // eslint-disable-next-line no-new -- I am using new for side effects
             new Projectile(
