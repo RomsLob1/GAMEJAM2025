@@ -172,6 +172,9 @@ export default class Game extends Phaser.Scene {
     this.load.audio("music1", "/sounds/music1.mp3");
     this.load.audio("music2", "/sounds/music2.mp3");
     this.load.audio("music3", "/sounds/music3.mp3");
+    this.load.audio("sword1", "/sounds/swordhit1.wav");
+    this.load.audio("sword2", "/sounds/swordhit2.wav");
+    this.load.audio("sword3", "/sounds/swordhit3.wav");
   }
 
   #createAnims() {
