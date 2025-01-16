@@ -114,14 +114,14 @@ export default class Unit extends Phaser.GameObjects.Container {
             );
             this.AIOptions.lastAttack = this.scene.game.getTime();
 
-            if (this.faction === "knights") {
+            if (this.scene.faction === "knights") {
               this.scene.sound.play(
                 `bowattack${Math.floor(Math.random() * 2) + 1}`,
                 {
                   volume: 0.5,
                 },
               );
-            } else if (this.faction === "pirates") {
+            } else if (this.scene.faction === "pirates") {
               this.scene.sound.play(`canonshoot`, {
                 volume: 0.5,
               });
