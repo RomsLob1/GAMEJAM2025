@@ -13,6 +13,15 @@ export default class Game extends Phaser.Scene {
     this.#createAnims();
     this.targetCameraX = 0;
 
+    this.backgroundMusic = this.sound.add(
+      `music${Math.floor(Math.random() * 3) + 1}`,
+      {
+        volume: 0.5,
+        loop: true,
+      },
+    );
+    this.backgroundMusic.play();
+
     this.scene.launch("spawnUI", { faction: this.faction });
 
     this.units.push(
@@ -160,6 +169,9 @@ export default class Game extends Phaser.Scene {
     this.load.image("background", "/background.png");
     this.load.image("boat", "/boat.png");
     this.load.image("castle", "/castle.png");
+    this.load.audio("music1", "/sounds/music1.mp3");
+    this.load.audio("music2", "/sounds/music2.mp3");
+    this.load.audio("music3", "/sounds/music3.mp3");
   }
 
   #createAnims() {
