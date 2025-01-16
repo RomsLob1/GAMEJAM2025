@@ -98,12 +98,12 @@ export default class Game extends Phaser.Scene {
       if (!this.bases[0].alive) {
         text =
           this.faction === "knights"
-            ? "Tu as réussi a repousser les pirates !"
-            : "Les chevaliers vous ont repousser...";
+            ? "Tu as réussi à repousser les pirates !"
+            : "Les chevaliers vous ont repoussé...";
       } else if (!this.bases[1].alive) {
         text =
           this.faction === "pirates"
-            ? "Tu as réussi à envahir le chateau !"
+            ? "Tu as réussi à envahir le château !"
             : "Les pirates vous ont envahi...";
       }
       const endText = this.add
