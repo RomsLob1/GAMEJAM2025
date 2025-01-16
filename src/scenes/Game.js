@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
     this.units = [];
     this.#createAnims();
     this.targetCameraX = 0;
+    this.sound.pauseOnBlur = false;
 
     this.backgroundMusic = this.sound.add(
       `music${Math.floor(Math.random() * 3) + 1}`,
