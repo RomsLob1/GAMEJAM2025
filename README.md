@@ -1,7 +1,7 @@
 # Légendes, Croisades et Pirates
 
 
-Dans le cadre du projet GameJam, nous avons créé un jeu de stratégie où s'affrontent des factions emblématiques : les chevaliers et les pirates. Le thème choisie pour cette année était **"Pirates et Chevaliers (et une poule qui court)"**.
+Dans le cadre du projet GameJam 2025, nous avons créé un jeu de stratégie où s'affrontent des factions emblématiques : les chevaliers et les pirates. Le thème choisie pour cette année était **"Pirates et Chevaliers (et une poule qui court)"**.
 
 
 ## 📜 Présentation du jeu
