@@ -177,7 +177,7 @@ export default class Game extends Phaser.Scene {
     this.targetCameraX = Phaser.Math.Clamp(
       this.targetCameraX,
       cameraBounds.left,
-      cameraBounds.right,
+      2200,
     );
   }
 
