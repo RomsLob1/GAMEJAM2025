@@ -83,6 +83,8 @@ export default class Game extends Phaser.Scene {
       unit.layer = this.layers.front;
       unit.setDepth(1);
     });
+
+    this.#handleSpawnEvent();
   }
 
   get damageables() {
@@ -176,5 +178,13 @@ export default class Game extends Phaser.Scene {
   #setBounds({ x, y, width, height }) {
     this.cameras.main.setBounds(x, y, width, height);
     this.physics.world.setBounds(x, y, width, height);
+  }
+
+  #handleSpawnEvent() {
+    const spawnScene = this.scene.get("spawnUI");
+
+    spawnScene.events.on("spawnUnit", (unit) => {
+      this.units.push(unitFactory(this.faction, unit, this, "player"));
+    });
   }
 }
