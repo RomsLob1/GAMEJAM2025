@@ -57,9 +57,12 @@ export default class SpawnUI extends Phaser.Scene {
         : ["MiniPirateCrew", "MiniPirateGunner", "MiniCannon"];
     const costs = [2, 5, 10];
 
+    this.emitter = new Phaser.Events.EventEmitter();
+
     units.forEach((unit, index) => {
       const y = this.sys.canvas.height - 110;
       const x = 10 + index * 110;
+      const cost = costs[index];
       const unitButton = this.add
         .rectangle(x, y, 100, 100, 0x888888)
         .setOrigin(0, 0)
@@ -68,6 +71,11 @@ export default class SpawnUI extends Phaser.Scene {
 
       const imgUnit = this.add.image(x + 50, y + 50, unit).setScale(3);
       this.layers.front.add(imgUnit);
+      const effects = imgUnit.preFX.addColorMatrix();
+      effects.grayscale();
+      this.emitter.on("creditsChanged", () => {
+        effects.grayscale(this.credits < cost ? 1 : 0);
+      });
 
       unitButton.on("pointerover", () => {
         unitButton.fillColor = 0xaaaaaa;
@@ -77,7 +85,7 @@ export default class SpawnUI extends Phaser.Scene {
       });
       unitButton.on("pointerdown", () => {
         if (this.credits >= costs[index]) {
-          this.credits -= costs[index];
+          this.credits -= cost;
           this.events.emit("spawnUnit", index + 1);
         }
       });
@@ -86,6 +94,7 @@ export default class SpawnUI extends Phaser.Scene {
 
   set credits(value) {
     this._credits = value;
+    this.emitter.emit("creditsChanged");
     this.energyDisplay.setText(`Credits ${this.credits}`);
   }
 
