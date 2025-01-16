@@ -89,6 +89,10 @@ export default class Unit extends Phaser.GameObjects.Container {
           this.playAnimationAfterRepeat("idle");
           this.AIOptions.lastAttack = this.scene.game.getTime();
           closestEnemy.damage(this.AIOptions.attack);
+
+          this.scene.sound.play(`sword${Math.floor(Math.random() * 3) + 1}`, {
+            volume: 0.5,
+          });
         } else {
           if (this.mainSprite.anims.currentAnim.key === `attack-${this.key}`)
             return;
@@ -105,6 +109,13 @@ export default class Unit extends Phaser.GameObjects.Container {
               40,
             );
             this.AIOptions.lastAttack = this.scene.game.getTime();
+
+            this.scene.sound.play(
+              `bowattack${Math.floor(Math.random() * 2) + 1}`,
+              {
+                volume: 0.5,
+              },
+            );
           });
         }
       }
