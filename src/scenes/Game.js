@@ -36,6 +36,17 @@ export default class Game extends Phaser.Scene {
     this.layers.front.setDepth(2);
     this.layers.endMessage.setDepth(3);
 
+    const inputText = this.add
+      .text(10, 10, "Appuyez sur Q ou D / ← ou → pour bouger", {
+        fontSize: 20,
+        color: "white",
+        align: "center",
+        stroke: "#000000",
+        strokeThickness: 4,
+      })
+      .setOrigin(0, 0);
+    this.layers.front.add(inputText);
+
     const background = this.add.image(1500, 300, "background").setScale(1.2);
     this.imageWidth = 3000;
     this.imageHeight = 250;
