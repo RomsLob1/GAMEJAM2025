@@ -24,6 +24,7 @@ export default class Game extends Phaser.Scene {
       bg: this.add.layer(),
       back: this.add.layer(),
       front: this.add.layer(),
+      endMessage: this.add.layer(),
     };
 
     const background = this.add.image(1500, 300, "background").setScale(1.2);
@@ -69,6 +70,37 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
+    if (this.bases.some((base) => !base.alive)) {
+      let text = "";
+      this.game.pause();
+      if (!this.bases[0].alive) {
+        text =
+          this.faction === "knight"
+            ? "Tu as réussi a repousser les pirates !"
+            : "Les chevaliers vous ont repousser...";
+      } else if (!this.bases[1].alive) {
+        text =
+          this.faction === "pirate"
+            ? "Tu as réussi à envahir le chateau !"
+            : "Les pirates vous ont envahi...";
+      }
+      const endText = this.add
+        .text(
+          this.sys.canvas.width / 2 + this.cameras.main.scrollX,
+          this.sys.canvas.height / 2,
+          text,
+          {
+            fontSize: 25,
+            color: "white",
+            align: "center",
+            stroke: "#000000",
+            strokeThickness: 4,
+          },
+        )
+        .setOrigin(0.5);
+      endText.layer = this.layers.endMessage;
+    }
+
     this.units = this.units.filter((unit) => unit.alive);
 
     const smoothFactor = 0.1;
