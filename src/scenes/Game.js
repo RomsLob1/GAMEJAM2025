@@ -13,6 +13,8 @@ export default class Game extends Phaser.Scene {
     this.#createAnims();
     this.targetCameraX = 0;
 
+    this.scene.launch("spawnUI", { faction: this.faction });
+
     this.units.push(unitFactory("knights", 1, this, "player"));
     this.units.push(unitFactory("knights", 2, this, "player"));
     this.units.push(unitFactory("knights", 3, this, "player"));
