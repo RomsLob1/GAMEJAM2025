@@ -36,7 +36,7 @@ export default class SpawnUI extends Phaser.Scene {
     this.energyDisplay = this.add.text(
       200,
       this.sys.canvas.height - 140,
-      `Credits ${this.credits}`,
+      `Crédits ${this.credits}`,
       {
         fontSize: 20,
       },
