@@ -54,7 +54,7 @@ export default class SpawnUI extends Phaser.Scene {
         unitButton.fillColor = 0x888888;
       });
       unitButton.on("pointerdown", () => {
-        this.events.emit("spawnUnit", unit);
+        this.events.emit("spawnUnit", index + 1);
       });
     });
   }
