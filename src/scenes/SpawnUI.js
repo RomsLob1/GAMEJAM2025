@@ -31,7 +31,7 @@ export default class SpawnUI extends Phaser.Scene {
     });
 
     const units =
-      this.faction === "knight"
+      this.faction === "knights"
         ? ["MiniSwordMan", "MiniArcherMan", "MiniHorseMan"]
         : ["MiniPirateCrew", "MiniPirateGunner", "MiniCannon"];
 

@@ -15,12 +15,30 @@ export default class Game extends Phaser.Scene {
 
     this.scene.launch("spawnUI", { faction: this.faction });
 
-    this.units.push(unitFactory("knights", 1, this, "player"));
-    this.units.push(unitFactory("knights", 2, this, "player"));
-    this.units.push(unitFactory("knights", 3, this, "player"));
-    this.units.push(unitFactory("pirates", 1, this, "bot"));
-    this.units.push(unitFactory("pirates", 2, this, "bot"));
-    this.units.push(unitFactory("pirates", 3, this, "bot"));
+    this.units.push(
+      unitFactory(
+        this.faction === "knights" ? "pirates" : "knights",
+        1,
+        this,
+        "bot",
+      ),
+    );
+    this.units.push(
+      unitFactory(
+        this.faction === "knights" ? "pirates" : "knights",
+        2,
+        this,
+        "bot",
+      ),
+    );
+    this.units.push(
+      unitFactory(
+        this.faction === "knights" ? "pirates" : "knights",
+        3,
+        this,
+        "bot",
+      ),
+    );
 
     this.layers = {
       bg: this.add.layer(),
@@ -36,19 +54,19 @@ export default class Game extends Phaser.Scene {
     this.bases = [
       new Base(
         this,
-        this.faction === "pirate" ? 400 : 2700,
+        this.faction === "pirates" ? 400 : 2700,
         275,
         "boat",
       ).setScale(1.4),
       new Base(
         this,
-        this.faction === "knight" ? 400 : 2700,
+        this.faction === "knights" ? 400 : 2700,
         335,
         "castle",
       ).setScale(2),
     ];
 
-    if (this.faction === "knight") {
+    if (this.faction === "knights") {
       background.flipX = true;
       this.bases[0].setFlipX(true);
       this.bases[1].setFlipX(true);
@@ -77,12 +95,12 @@ export default class Game extends Phaser.Scene {
       this.game.pause();
       if (!this.bases[0].alive) {
         text =
-          this.faction === "knight"
+          this.faction === "knights"
             ? "Tu as réussi a repousser les pirates !"
             : "Les chevaliers vous ont repousser...";
       } else if (!this.bases[1].alive) {
         text =
-          this.faction === "pirate"
+          this.faction === "pirates"
             ? "Tu as réussi à envahir le chateau !"
             : "Les pirates vous ont envahi...";
       }
