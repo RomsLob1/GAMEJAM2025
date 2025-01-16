@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
     this.units = [];
     this.#createAnims();
     this.targetCameraX = 0;
+    this.sound.pauseOnBlur = false;
 
     this.backgroundMusic = this.sound.add(
       `music${Math.floor(Math.random() * 3) + 1}`,
@@ -30,6 +31,21 @@ export default class Game extends Phaser.Scene {
       front: this.add.layer(),
       endMessage: this.add.layer(),
     };
+    this.layers.bg.setDepth(0);
+    this.layers.back.setDepth(1);
+    this.layers.front.setDepth(2);
+    this.layers.endMessage.setDepth(3);
+
+    const inputText = this.add
+      .text(10, 10, "Appuyez sur Q ou D / ← ou → pour bouger", {
+        fontSize: 20,
+        color: "white",
+        align: "center",
+        stroke: "#000000",
+        strokeThickness: 4,
+      })
+      .setOrigin(0, 0);
+    this.layers.front.add(inputText);
 
     const background = this.add.image(1500, 300, "background").setScale(1.2);
     this.imageWidth = 3000;
@@ -104,17 +120,20 @@ export default class Game extends Phaser.Scene {
   update() {
     if (this.bases.some((base) => !base.alive)) {
       let text = "";
+      let sound = "";
       this.game.pause();
       if (!this.bases[0].alive) {
         text =
           this.faction === "knights"
             ? "Tu as réussi à repousser les pirates !"
             : "Les chevaliers vous ont repoussé...";
+        sound = this.faction === "knights" ? "victory" : "defeat";
       } else if (!this.bases[1].alive) {
         text =
           this.faction === "pirates"
             ? "Tu as réussi à envahir le château !"
             : "Les pirates vous ont envahi...";
+        sound = this.faction === "pirates" ? "victory" : "defeat";
       }
       const endText = this.add
         .text(
@@ -131,6 +150,10 @@ export default class Game extends Phaser.Scene {
         )
         .setOrigin(0.5);
       endText.layer = this.layers.endMessage;
+      this.backgroundMusic.stop();
+      this.sound.play(sound, {
+        volume: 0.5,
+      });
     }
 
     this.units = this.units.filter((unit) => unit.alive);
@@ -161,7 +184,7 @@ export default class Game extends Phaser.Scene {
     this.targetCameraX = Phaser.Math.Clamp(
       this.targetCameraX,
       cameraBounds.left,
-      cameraBounds.right,
+      2200,
     );
   }
 
@@ -181,6 +204,8 @@ export default class Game extends Phaser.Scene {
     this.load.audio("bowattack2", "/sounds/bowattack2.wav");
     this.load.audio("bowhit1", "/sounds/bowhit1.wav");
     this.load.audio("bowhit2", "/sounds/bowhit2.wav");
+    this.load.audio("victory", "/sounds/victory.mp3");
+    this.load.audio("defeat", "/sounds/gameover.mp3");
   }
 
   #createAnims() {
