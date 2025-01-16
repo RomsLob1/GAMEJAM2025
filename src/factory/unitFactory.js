@@ -58,7 +58,7 @@ export default function unitFactory(faction, tier, scene, side) {
     if (tier === 3) {
       return new Unit(scene, side, "MiniCannon", {
         maxHealth: 50,
-        speed: 15,
+        speed: 20,
         attack: 15,
         range: 100,
         type: "ranged",
