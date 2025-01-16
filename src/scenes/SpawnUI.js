@@ -101,7 +101,7 @@ export default class SpawnUI extends Phaser.Scene {
   set credits(value) {
     this._credits = value;
     this.emitter.emit("creditsChanged");
-    this.energyDisplay.setText(`Credits ${this.credits}`);
+    this.energyDisplay.setText(`Crédits ${this.credits}`);
   }
 
   get credits() {
