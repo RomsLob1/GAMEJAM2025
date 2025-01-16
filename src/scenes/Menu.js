@@ -59,6 +59,75 @@ export default class Menu extends Scene {
     piratesBtn.frame.on("pointerdown", () => {
       this.scene.start("game", { faction: "pirates" });
     });
+
+    this.add
+      .text(
+        this.sys.canvas.width / 2,
+        this.sys.canvas.height / 2 + 100,
+        "Crédits",
+        {
+          fontSize: "32px",
+          stroke: "#000000",
+          strokeThickness: 2,
+        },
+      )
+      .setOrigin(0.5);
+
+    this.add
+      .text(
+        this.sys.canvas.width / 2,
+        this.sys.canvas.height / 2 + 150,
+        "Développé par Florian CHASSELOUP, Clément DAVID,\n Romain LOBREAU et Raphaël VÉRY",
+        {
+          fontSize: "24px",
+          stroke: "#000000",
+          strokeThickness: 2,
+          align: "center",
+        },
+      )
+      .setOrigin(0.5);
+
+    this.add
+      .text(
+        this.sys.canvas.width / 2,
+        this.sys.canvas.height / 2 + 200,
+        "Musiques par alkakrab.itch.io",
+        {
+          fontSize: "24px",
+          stroke: "#000000",
+          strokeThickness: 2,
+          align: "center",
+        },
+      )
+      .setOrigin(0.5);
+
+    this.add
+      .text(
+        this.sys.canvas.width / 2,
+        this.sys.canvas.height / 2 + 250,
+        "Sons par tommusic.itch.io",
+        {
+          fontSize: "24px",
+          stroke: "#000000",
+          strokeThickness: 2,
+          align: "center",
+        },
+      )
+      .setOrigin(0.5);
+
+    this.add
+      .text(
+        this.sys.canvas.width / 2,
+        this.sys.canvas.height / 2 + 300,
+        "Sprites par lyaseek.itch.io",
+        {
+          fontSize: "24px",
+          stroke: "#000000",
+          strokeThickness: 2,
+          align: "center",
+        },
+      )
+      .setOrigin(0.5);
   }
 
   preload() {
