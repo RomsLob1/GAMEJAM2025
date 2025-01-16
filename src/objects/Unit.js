@@ -13,8 +13,8 @@ export default class Unit extends Phaser.GameObjects.Container {
    * @param { {range?: number, attackCooldown?: number, speed?: number, maxHealth?: number, attack?: number, type?: "ranged" | "melee", projectileKey: string} } AIOptions The options of the unit's AI
    */
   constructor(scene, side, key, AIOptions) {
-    const x = side === "player" ? 0 : 600;
-    super(scene, x + 10, scene.sys.canvas.height / 2);
+    const x = side === "player" ? 0 : 2990;
+    super(scene, x + 10, 410);
     this.key = key;
 
     this.mainSprite = new Phaser.GameObjects.Sprite(scene, 0, 0, key);
