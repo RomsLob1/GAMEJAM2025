@@ -24,6 +24,7 @@ export default function unitFactory(faction, tier, scene, side) {
         attack: 5,
         speed: 65,
         range: 100,
+        reward: 3,
         type: "ranged",
         projectileKey: "Arrow",
         attackCooldown: 1000,
@@ -35,6 +36,7 @@ export default function unitFactory(faction, tier, scene, side) {
         speed: 25,
         attack: 9,
         range: 40,
+        reward: 5,
       });
     }
   } else if (faction === "pirates") {
@@ -53,6 +55,7 @@ export default function unitFactory(faction, tier, scene, side) {
         type: "ranged",
         projectileKey: "MiniCannonBall",
         attackCooldown: 1000,
+        reward: 3,
       });
     }
     if (tier === 3) {
@@ -64,6 +67,7 @@ export default function unitFactory(faction, tier, scene, side) {
         type: "ranged",
         projectileKey: "MiniCannonBall",
         attackCooldown: 4000,
+        reward: 5,
       });
     }
   }

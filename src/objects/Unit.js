@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Projectile from "./Projectile.js";
+import SpawnUI from "../scenes/SpawnUI.js";
 
 /**
  *
@@ -10,7 +11,7 @@ export default class Unit extends Phaser.GameObjects.Container {
    * @param {import("../scenes/Game").default} scene The scene this unit belongs in
    * @param {"player" | "bot"} side player or bot side
    * @param {string} key key of the texture
-   * @param { {range?: number, attackCooldown?: number, speed?: number, maxHealth?: number, attack?: number, type?: "ranged" | "melee", projectileKey: string} } AIOptions The options of the unit's AI
+   * @param { {range?: number, attackCooldown?: number, speed?: number, maxHealth?: number, attack?: number, type?: "ranged" | "melee", projectileKey: string, reward?: number} } AIOptions The options of the unit's AI
    */
   constructor(scene, side, key, AIOptions) {
     const x = side === "player" ? 0 : 2990;
@@ -39,6 +40,7 @@ export default class Unit extends Phaser.GameObjects.Container {
       speed: 40,
       maxHealth: 10,
       attack: 2,
+      reward: 1,
       type: "melee",
       ...AIOptions,
       lastAttack: scene.game.getTime(),
@@ -170,6 +172,9 @@ export default class Unit extends Phaser.GameObjects.Container {
         this.scene.children.remove(this);
         this.destroy();
       });
+
+      if (this.side === "bot")
+        SpawnUI.instance.credits += this.AIOptions.reward;
     }
   }
 

@@ -4,7 +4,9 @@ import Phaser from "phaser";
  * @property {import("../objects/Unit.js").default[]} units All units on the map
  */
 export default class SpawnUI extends Phaser.Scene {
+  static instance;
   create(data) {
+    SpawnUI.instance = this;
     this.faction = data.faction;
     this.layers = {
       bg: this.add.layer(),
@@ -42,7 +44,7 @@ export default class SpawnUI extends Phaser.Scene {
 
     // every amount of time add energy
     this.time.addEvent({
-      delay: 1000,
+      delay: 2000,
       loop: true,
       callback: () => {
         this.credits += 1;
