@@ -31,6 +31,10 @@ export default class Game extends Phaser.Scene {
       front: this.add.layer(),
       endMessage: this.add.layer(),
     };
+    this.layers.bg.setDepth(0);
+    this.layers.back.setDepth(1);
+    this.layers.front.setDepth(2);
+    this.layers.endMessage.setDepth(3);
 
     const background = this.add.image(1500, 300, "background").setScale(1.2);
     this.imageWidth = 3000;
