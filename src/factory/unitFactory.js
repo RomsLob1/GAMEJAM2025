@@ -13,62 +13,98 @@ export default function unitFactory(faction, tier, scene, side) {
   // TODO: Ajuster les stats (actuellement les pirates sont plus faibles que les chevaliers)
   if (faction === "knights") {
     if (tier === 1) {
-      return new Unit(scene, side, "MiniSwordMan", {
-        maxHealth: 20,
-        attack: 3,
-      });
+      return new Unit(
+        scene,
+        side,
+        "MiniSwordMan",
+        {
+          maxHealth: 20,
+          attack: 3,
+        },
+        faction,
+      );
     }
     if (tier === 2) {
-      return new Unit(scene, side, "MiniArcherMan", {
-        maxHealth: 10,
-        attack: 5,
-        speed: 65,
-        range: 100,
-        reward: 3,
-        type: "ranged",
-        projectileKey: "Arrow",
-        attackCooldown: 1000,
-      });
+      return new Unit(
+        scene,
+        side,
+        "MiniArcherMan",
+        {
+          maxHealth: 10,
+          attack: 5,
+          speed: 65,
+          range: 100,
+          reward: 3,
+          type: "ranged",
+          projectileKey: "Arrow",
+          attackCooldown: 1000,
+        },
+        faction,
+      );
     }
     if (tier === 3) {
-      return new Unit(scene, side, "MiniHorseMan", {
-        maxHealth: 50,
-        speed: 25,
-        attack: 9,
-        range: 40,
-        reward: 5,
-      });
+      return new Unit(
+        scene,
+        side,
+        "MiniHorseMan",
+        {
+          maxHealth: 50,
+          speed: 25,
+          attack: 9,
+          range: 40,
+          reward: 5,
+        },
+        faction,
+      );
     }
   } else if (faction === "pirates") {
     if (tier === 1) {
-      return new Unit(scene, side, "MiniPirateCrew", {
-        maxHealth: 20,
-        attack: 3,
-      });
+      return new Unit(
+        scene,
+        side,
+        "MiniPirateCrew",
+        {
+          maxHealth: 20,
+          attack: 3,
+        },
+        faction,
+      );
     }
     if (tier === 2) {
-      return new Unit(scene, side, "MiniPirateGunner", {
-        maxHealth: 10,
-        attack: 5,
-        speed: 65,
-        range: 100,
-        type: "ranged",
-        projectileKey: "MiniCannonBall",
-        attackCooldown: 1000,
-        reward: 3,
-      });
+      return new Unit(
+        scene,
+        side,
+        "MiniPirateGunner",
+        {
+          maxHealth: 10,
+          attack: 5,
+          speed: 65,
+          range: 100,
+          type: "ranged",
+          projectileKey: "MiniCannonBall",
+          attackCooldown: 1000,
+          reward: 3,
+        },
+        faction,
+      );
     }
     if (tier === 3) {
-      return new Unit(scene, side, "MiniCannon", {
-        maxHealth: 50,
-        speed: 20,
-        attack: 15,
-        range: 100,
-        type: "ranged",
-        projectileKey: "MiniCannonBall",
-        attackCooldown: 4000,
-        reward: 5,
-      });
+      return new Unit(
+        scene,
+        side,
+        "MiniCannon",
+        {
+          maxHealth: 50,
+          speed: 20,
+          attack: 15,
+          range: 115,
+          type: "ranged",
+          projectileKey: "MiniCannonBall",
+          attackCooldown: 4000,
+          reward: 5,
+        },
+        faction,
+      );
     }
   }
 

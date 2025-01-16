@@ -12,7 +12,7 @@ export default class Unit extends Phaser.GameObjects.Container {
    * @param {"player" | "bot"} side player or bot side
    * @param {string} key key of the texture
    * @param { {range?: number, attackCooldown?: number, speed?: number, maxHealth?: number, attack?: number, type?: "ranged" | "melee", projectileKey: string, reward?: number} } AIOptions The options of the unit's AI
-   * @param {"knigts" | "pirates" } faction
+   * @param {"knigts" | "pirates" } faction The faction of the unit
    */
   constructor(scene, side, key, AIOptions, faction) {
     const x = side === "player" ? 0 : 2990;
@@ -114,34 +114,14 @@ export default class Unit extends Phaser.GameObjects.Container {
             );
             this.AIOptions.lastAttack = this.scene.game.getTime();
 
-            if (this.scene.faction === "knights" && this.side === "player") {
+            if (this.faction === "knights") {
               this.scene.sound.play(
                 `bowattack${Math.floor(Math.random() * 2) + 1}`,
                 {
                   volume: 0.5,
                 },
               );
-            } else if (
-              this.scene.faction === "pirates" &&
-              this.side === "player"
-            ) {
-              this.scene.sound.play(`canonshoot`, {
-                volume: 0.5,
-              });
-            } else if (
-              this.scene.faction === "knights" &&
-              this.side === "bot"
-            ) {
-              this.scene.sound.play(
-                `bowattack${Math.floor(Math.random() * 2) + 1}`,
-                {
-                  volume: 0.5,
-                },
-              );
-            } else if (
-              this.scene.faction === "pirates" &&
-              this.side === "bot"
-            ) {
+            } else if (this.faction === "pirates") {
               this.scene.sound.play(`canonshoot`, {
                 volume: 0.5,
               });
