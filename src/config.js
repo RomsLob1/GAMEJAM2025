@@ -14,8 +14,8 @@ export default {
   physics: {
     default: "arcade",
     arcade: {
-      debug: import.meta.env.MODE === "development",
-      debugShowBody: true,
+      debug: false,
+      debugShowBody: false,
     },
   },
   backgroundColor: "#87CEEB",
