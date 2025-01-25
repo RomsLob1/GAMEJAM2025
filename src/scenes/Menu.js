@@ -10,11 +10,12 @@ export default class Menu extends Scene {
       .text(
         this.sys.canvas.width / 2,
         this.sys.canvas.height / 10,
-        "[Name of the game]",
+        "Légendes, Croisades\n et Pirates",
         {
           fontSize: "64px",
           stroke: "#000000",
           strokeThickness: 4,
+          align: "center",
         },
       )
       .setOrigin(0.5);
@@ -22,7 +23,7 @@ export default class Menu extends Scene {
     this.add
       .text(
         this.sys.canvas.width / 2,
-        (this.sys.canvas.height / 10) * 2,
+        (this.sys.canvas.height / 10) * 2 + 30,
         "Choisis ta faction",
         {
           fontSize: "64px",
